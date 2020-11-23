@@ -83,6 +83,28 @@ for ($i = 0; $i < $numRows; ++$i) {
     $recept["granen"][] = $graan;
 }
 
+// HET MAISCH SCHEMA TOEVOEGEN
+$recept["maischSchema"] = array();
+$query = "
+    SELECT MaischSchema.temperatuur, MaischSchema.tijd
+    FROM Recepten
+    INNER JOIN MaischSchema ON Recepten.naam = MaischSchema.recept
+    WHERE Recepten.naam = 'tripel'
+    ORDER BY MaischSchema.volgorde;
+";
+$result = $conn->query($query);
+
+$numRows = mysqli_num_rows($result);
+for ($i = 0; $i < $numRows; ++$i) {
+    $row = $result->fetch_assoc();
+    
+    $maischStap = array();
+    $maischStap["temperatuur"] = $row["temperatuur"];
+    $maischStap["tijd"] = $row["tijd"];
+
+    $recept["maischSchema"][] = $maischStap;
+}
+
 $conn->close();
 
 echo json_encode($recept);
