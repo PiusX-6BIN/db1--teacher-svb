@@ -12,4 +12,6 @@ function LoadData(text) {
 function LuisterNaarEvent() {
     let response = JSON.parse(request.response);
     console.log(response);
+
+    document.querySelector("#h1").innerHTML = response.titel;
 }
