@@ -1,0 +1,53 @@
+{
+    "titel": "tripel",
+    "beginSG": 1.080,
+    "eindvolume": 20,
+    "gist": "Danstar Nottingham",
+    "granen": [
+        {
+            "hoeveelheid": 5000,
+            "soort": "pilsmout",
+            "EBC": 3
+        }
+    ],
+    "hop": [
+        {
+            "hoeveelheid": 20,
+            "soort": "Northern Brewer",
+            "alpha": 9.9,
+            "kooktijd": 60
+        },
+        {
+            "hoeveelheid": 20,
+            "soort": "Saaz",
+            "alpha": 3.5,
+            "kooktijd": 15
+        }
+    ],
+    "overige": [
+        {
+            "hoeveelheid": 20,
+            "naam": "suiker",
+            "kooktijd": 10
+        },
+        {
+            "hoeveelheid": 20,
+            "naam": "koriander",
+            "kooktijd": 10
+        }
+    ],
+    "maischSchema": [
+        {
+            "temperatuur": 62,
+            "tijd": 30
+        },
+        {
+            "temperatuur": 72,
+            "tijd": 60
+        },
+        {
+            "temperatuur": 78,
+            "tijd": 5
+        }
+    ]
+}
