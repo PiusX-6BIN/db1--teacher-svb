@@ -1,6 +1,6 @@
 <?php
 
-$request = $_GET["vraag"];
+$request = $_GET["recept"];
 
 $servername = "localhost";
 $username = "bin20";
@@ -20,7 +20,7 @@ $recept = array();
 $query = "
     SELECT * 
     FROM Recepten
-    WHERE Recepten.naam = 'tripel';
+    WHERE Recepten.naam = '$request';
 ";
 
 $result = $conn->query($query);
@@ -43,7 +43,7 @@ $query = "
     FROM Recepten
     INNER JOIN ReceptHop ON ReceptHop.recept = Recepten.naam
     INNER JOIN Hop		 ON ReceptHop.hopsoort = Hop.naam
-    WHERE Recepten.naam = 'tripel';
+    WHERE Recepten.naam = '$request';
 ";
 $result = $conn->query($query);
 
@@ -67,7 +67,7 @@ $query = "
     FROM Recepten
     INNER JOIN ReceptGranen ON Recepten.naam = ReceptGranen.recept
     INNER JOIN Granen		ON ReceptGranen.graansoort = Granen.soort
-    WHERE Recepten.naam = 'tripel';
+    WHERE Recepten.naam = '$request';
 ";
 $result = $conn->query($query);
 
@@ -89,7 +89,7 @@ $query = "
     SELECT MaischSchema.temperatuur, MaischSchema.tijd
     FROM Recepten
     INNER JOIN MaischSchema ON Recepten.naam = MaischSchema.recept
-    WHERE Recepten.naam = 'tripel'
+    WHERE Recepten.naam = '$request'
     ORDER BY MaischSchema.volgorde;
 ";
 $result = $conn->query($query);
@@ -111,7 +111,7 @@ $query = "
     SELECT OverigeIngredienten.soort, OverigeIngredienten.hoeveelheid, OverigeIngredienten.kooktijd
     FROM Recepten
     INNER JOIN OverigeIngredienten ON Recepten.naam = OverigeIngredienten.recept
-    WHERE Recepten.naam = 'tripel';
+    WHERE Recepten.naam = '$request';
 ";
 $result = $conn->query($query);
 
