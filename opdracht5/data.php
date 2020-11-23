@@ -69,6 +69,7 @@ $query = "
     INNER JOIN Granen		ON ReceptGranen.graansoort = Granen.soort
     WHERE Recepten.naam = 'tripel';
 ";
+$result = $conn->query($query);
 
 $numRows = mysqli_num_rows($result);
 for ($i = 0; $i < $numRows; ++$i) {
