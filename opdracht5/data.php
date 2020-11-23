@@ -15,6 +15,8 @@ if ($conn === false) {
 
 $recept = array();
 
+// ALGEMENE INFO VAN RECEPT (naam, SG, eindvol., gist)
+
 $query = "
     SELECT * 
     FROM Recepten
@@ -33,6 +35,9 @@ for ($i = 0; $i < $numRows; ++$i) {
     $recept["gist"] = $row["gist"];
 }
 
+// ALLE HOPSOORTEN DIE GEBRUIKT WORDEN + EIGENSCHAPPEN VAN DE HOP
+
+$recept["hop"] = array();
 $query = "
     SELECT ReceptHop.hopsoort, ReceptHop.hoeveelheid, ReceptHop.kooktijd, Hop.alpha
     FROM Recepten
@@ -40,10 +45,8 @@ $query = "
     INNER JOIN Hop		 ON ReceptHop.hopsoort = Hop.naam
     WHERE Recepten.naam = 'tripel';
 ";
-
 $result = $conn->query($query);
 
-$recept["hop"] = array();
 $numRows = mysqli_num_rows($result);
 for ($i = 0; $i < $numRows; ++$i) {
     $row = $result->fetch_assoc();
@@ -55,6 +58,28 @@ for ($i = 0; $i < $numRows; ++$i) {
     $hop["kooktijd"] = $row["kooktijd"];
 
     $recept["hop"][] = $hop;
+}
+
+// ALLE GRAANSOORTEN DIE GEBRUIKT WORDEN + EIGENSCHAPPEN VAN HET GRAAN
+$recept["granen"] = array();
+$query = "
+    SELECT ReceptGranen.hoeveelheid, ReceptGranen.graansoort, Granen.EBC
+    FROM Recepten
+    INNER JOIN ReceptGranen ON Recepten.naam = ReceptGranen.recept
+    INNER JOIN Granen		ON ReceptGranen.graansoort = Granen.soort
+    WHERE Recepten.naam = 'tripel';
+";
+
+$numRows = mysqli_num_rows($result);
+for ($i = 0; $i < $numRows; ++$i) {
+    $row = $result->fetch_assoc();
+    
+    $graan = array();
+    $graan["hoeveelheid"] = $row["hoeveelheid"];
+    $graan["soort"] = $row["graansoort"];
+    $graan["EBC"] = $row["EBC"];
+
+    $recept["granen"][] = $graan;
 }
 
 $conn->close();
