@@ -14,6 +14,7 @@ if ($conn === false) {
 }
 
 $query = "
+    SELECT * FROM Recepten;
 ";
 
 $result = $conn->query($query);
