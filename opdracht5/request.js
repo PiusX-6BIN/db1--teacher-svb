@@ -13,5 +13,5 @@ function LuisterNaarEvent() {
     let response = JSON.parse(request.response);
     console.log(response);
 
-    document.querySelector("#h1").innerHTML = response.titel;
+    document.querySelector("#titel").innerHTML = response.titel;
 }
