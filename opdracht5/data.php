@@ -105,6 +105,28 @@ for ($i = 0; $i < $numRows; ++$i) {
     $recept["maischSchema"][] = $maischStap;
 }
 
+// DE OVERIGE INGREDIENTEN TOEVOEGEN
+$recept["overige"] = array();
+$query = "
+    SELECT OverigeIngredienten.soort, OverigeIngredienten.hoeveelheid, OverigeIngredienten.kooktijd
+    FROM Recepten
+    INNER JOIN OverigeIngredienten ON Recepten.naam = OverigeIngredienten.recept
+    WHERE Recepten.naam = 'tripel';
+";
+$result = $conn->query($query);
+
+$numRows = mysqli_num_rows($result);
+for ($i = 0; $i < $numRows; ++$i) {
+    $row = $result->fetch_assoc();
+    
+    $ingredient = array();
+    $ingredient["hoeveelheid"] = $row["hoeveelheid"];
+    $ingredient["naam"] = $row["soort"];
+    $ingredient["kooktijd"] = $row["kooktijd"];
+
+    $recept["overige"][] = $ingredient;
+}
+
 $conn->close();
 
 echo json_encode($recept);
